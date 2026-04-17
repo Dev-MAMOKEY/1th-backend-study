@@ -9,7 +9,7 @@ public class Withdrawal implements Transactions{
         }
 
         int minusAccount = account.getBalance()-money;
-        if(minusAccount<account.MIN_BALABCE){ㅌ
+        if(minusAccount<account.MIN_BALABCE){
             return false;
         }else{
             account.setBalance(minusAccount);
