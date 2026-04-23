@@ -9,8 +9,8 @@ public class UserView {
         while (true) {
             try {
                 System.out.println("출력하고 싶은 캐릭터 번호를 입력하세요");
-                System.out.println("1.마녀");
-                System.out.println("2.전사");
+                System.out.println("1.전사");
+                System.out.println("2.마녀");
                 choice = sc.nextInt();
                 if (choice == 1 || choice == 2) {
                     break;
