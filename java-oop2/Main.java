@@ -4,7 +4,7 @@ import view.UserMenu;
 
 
 public class Main{
-    public  static void main(String[] args){
+    public static void main(String[] args){
         Account account = new Account(123,"LEE",0);
         UserMenu userMenu = new UserMenu();
 
