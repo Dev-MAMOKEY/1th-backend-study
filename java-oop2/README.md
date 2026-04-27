@@ -34,10 +34,8 @@ java-oop2/
 │   │   │   ├── CheckBalance.java
 │   │   │   └── UserInformation.java
 │   │   └── errormessage/
-│   │       ├── DepositError.java
-│   │       ├── Error.java (interface)
-│   │       ├── InputError.java
 │   │       └── WithdrawalError.java
+│   │       
 │   ├── userinput/
 │   │   ├── DepositInput.java
 │   │   ├── UserInput.java (interface)
