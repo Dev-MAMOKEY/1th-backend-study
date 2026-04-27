@@ -7,8 +7,8 @@ public class Deposit implements Transactions {
         if(money<=0){
             return false;
         }else{
-            int pluseAccount = account.getBalance()+money;
-            account.setBalance(pluseAccount);
+            int plusAccount = account.getBalance()+money;
+            account.setBalance(plusAccount);
             return true;
         }
     }
