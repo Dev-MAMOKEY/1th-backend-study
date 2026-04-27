@@ -10,8 +10,8 @@ import view.userinput.DepositInput;
 import view.userinput.UserInput;
 import view.userinput.WithdrawalInput;
 public class AccountController {
-    private  Account account;
-    private  UserMenu userMenu;
+    private final Account account;
+    private final UserMenu userMenu;
 
 
 
