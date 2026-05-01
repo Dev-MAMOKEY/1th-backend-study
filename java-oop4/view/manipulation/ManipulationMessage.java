@@ -1,6 +1,5 @@
 package view.manipulation;
 
-import view.ProductSelect;
 
 public class ManipulationMessage{
     public static void turnonMessage(String productName) {
