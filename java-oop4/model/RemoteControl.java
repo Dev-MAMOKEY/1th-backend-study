@@ -1,11 +1,11 @@
 package model;
 
 public interface RemoteControl {
-    public void  turnOn();
-    public void turnOff();
-    public boolean volumeUp();
-    public boolean  volumeDown();
-    public String getName();
-    public boolean getPower();
-    public int getVolume();
+     void  turnOn();
+     void turnOff();
+     boolean volumeUp();
+     boolean  volumeDown();
+     String getName();
+     boolean getPower();
+     int getVolume();
 }
