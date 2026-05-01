@@ -102,7 +102,7 @@ public class RemoteController {
                             ErrorMessage.powerCondition();
                             continue;
                         }
-                        if (remote.getPower()) {
+                        if (remote.volumeUp()) {
                             ManipulationMessage.volumupMessage(remote.getName());
                         } else {
                             ErrorMessage.volumeupError();
@@ -115,7 +115,7 @@ public class RemoteController {
                                 ErrorMessage.powerCondition();
                                 continue;
                             }
-                            if(remote.getPower()){
+                            if(remote.volumeDown()){
                                 ManipulationMessage.volumdownMessage(remote.getName());
                             }else{
                                 ErrorMessage.volumedownError();
