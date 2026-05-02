@@ -49,4 +49,10 @@ public class AirConditioner implements RemoteControl {
     public int getVolume(){
         return this.volume;
     }
+    public int getMaxVolume(){
+        return this.MAXVOLUME;
+    }
+    public int getMinVolume(){
+        return this.MINVOLUME;
+    }
 }
