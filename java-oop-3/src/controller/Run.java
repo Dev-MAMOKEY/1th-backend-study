@@ -6,24 +6,18 @@ import model.Character;
 import model.Mage;
 import model.Warrior;
 
-import view.ErrorMessage;
-import view.PrintInfo;
-import view.PrintMenu;
-import view.ExitMessage;
+import view.*;
 
 public class Run {
 
     public void run(){
         Scanner scanner = new Scanner(System.in);
 
-        PrintMenu printMenu = new PrintMenu();
-        PrintInfo printInfo = new PrintInfo();
-        ErrorMessage errorMessage = new ErrorMessage();
-        ExitMessage exitMessage = new ExitMessage();
+        GameView gameView = new GameView();
 
         while (true) {
 
-            printMenu.printMenu();
+            gameView.printMenu();
 
             int choice = scanner.nextInt();
 
@@ -38,15 +32,15 @@ public class Run {
                     character = new Mage();
                     break;
                 case 3:
-                    exitMessage.exitMessage();
+                    gameView.printExitMessage();
                     return;
                 default:
-                    errorMessage.errorMessage();
+                    gameView.printErrorMessage();
                     continue;
             }
 
             // 실제 객체가 Warrior인지 Mage인지에 따라, 각 클래스에서 오버라이딩된 attack()이 실행됨
-            printInfo.printInfo(character);
+            gameView.printInfo(character);
 
             System.out.println();
         }
