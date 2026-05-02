@@ -8,4 +8,7 @@ public interface RemoteControl {
      String getName();
      boolean getPower();
      int getVolume();
+     int getMaxVolume();
+     int getMinVolume();
+
 }

@@ -42,4 +42,10 @@ public class Television implements RemoteControl{
         return this.power;
     }
     public int getVolume(){return this.volume;}
+    public int getMaxVolume(){
+        return this.MAXVOLUME;
+    }
+    public int getMinVolume(){
+        return this.MINVOLUME;
+    }
 }
