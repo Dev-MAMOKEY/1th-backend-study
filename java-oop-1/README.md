@@ -11,9 +11,9 @@
 3. 프로그램을 실행한다 :
 `java Main`
 ## 💡 작업 내용
-- Department 클래스를 생성
+- model.Department 클래스를 생성
 - 필드(name, studentCount, building)정의
-- Main 클래스에서 여러 Department 객체를 생성
+- Main 클래스에서 여러 model.Department 객체를 생성
 - printInfo() 메서드를 구현하여 학과 정보 출력
 
 ## 🤔 느낀 점 / 어려웠던 점
