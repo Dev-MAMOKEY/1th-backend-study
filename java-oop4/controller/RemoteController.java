@@ -56,7 +56,7 @@ public class RemoteController {
                     if(remoteControl.volumeUp()){
                         ManipulationMessage.volumupMessage(remoteControl.getName());
                     }else{
-                        ErrorMessage.volumeupError();
+                        ErrorMessage.volumeupError(remoteControl.getName(),remoteControl.getMaxVolume());
                     }
 
                 }
@@ -68,7 +68,7 @@ public class RemoteController {
                     if(remoteControl.volumeDown()){
                         ManipulationMessage.volumdownMessage(remoteControl.getName());
                     }else{
-                        ErrorMessage.volumedownError();
+                        ErrorMessage.volumedownError(remoteControl.getName(),remoteControl.getMinVolume());
                     }
                 }
                 case 5 -> currentStatus.currentPower(remoteControl, remoteControl.getName());
@@ -105,7 +105,7 @@ public class RemoteController {
                         if (remote.volumeUp()) {
                             ManipulationMessage.volumupMessage(remote.getName());
                         } else {
-                            ErrorMessage.volumeupError();
+                            ErrorMessage.volumeupError(remote.getName(),remote.getMaxVolume());
                         }
                     }
                 }
@@ -118,7 +118,7 @@ public class RemoteController {
                             if(remote.volumeDown()){
                                 ManipulationMessage.volumdownMessage(remote.getName());
                             }else{
-                                ErrorMessage.volumedownError();
+                                ErrorMessage.volumedownError(remote.getName(),remote.getMinVolume());
                             }
 
                         }
