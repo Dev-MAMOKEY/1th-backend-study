@@ -40,7 +40,7 @@ public class Main {
         }
 
         if (select != null) {
-            computer.printAll(select);
+            select.printAll();
         } else {
             System.out.println("조회된 정보가 없습니다 ");
         }
