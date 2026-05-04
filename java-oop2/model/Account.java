@@ -1,7 +1,7 @@
 package model;
 // 계좌
 public class Account {
-    static String backName = "Mamoki Bank";
+    static String bankName = "Mamoki Bank";
     public final int MIN_BALABCE =0;
 
     private int accountNumber;
