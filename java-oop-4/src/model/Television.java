@@ -1,27 +1,21 @@
 package model;
 
-public class Television implements RemoteControl {
+public class Television extends AbstractRemoteControl {
 
     private int volume = 10;
+    private final int MIN_VOLUME = 0;
+    private final int MAX_VOLUME = 100;
 
     @Override
-    public void turnOn() {
-        System.out.println("TV 전원 ON");
+    public void controlUp() {
+        if (volume < MAX_VOLUME) {
+            volume++;
+        }
     }
 
     @Override
-    public void turnOff() {
-        System.out.println("TV 전원 OFF");
-    }
-
-    @Override
-    public void volumeUp() {
-        volume++;
-    }
-
-    @Override
-    public void volumeDown() {
-        if (volume > 0) {
+    public void controlDown() {
+        if (volume > MIN_VOLUME) {
             volume--;
         }
     }
@@ -32,7 +26,22 @@ public class Television implements RemoteControl {
     }
 
     @Override
-    public int getVolume() {
+    public String getControlName() {
+        return "음량";
+    }
+
+    @Override
+    public int getValue() {
         return volume;
+    }
+
+    @Override
+    public int getMinValue() {
+        return MIN_VOLUME;
+    }
+
+    @Override
+    public int getMaxValue() {
+        return MAX_VOLUME;
     }
 }

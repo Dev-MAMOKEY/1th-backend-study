@@ -1,28 +1,22 @@
 package model;
 
-public class AirConditioner implements RemoteControl {
+public class AirConditioner extends AbstractRemoteControl {
 
-    private int volume = 10;
+    private int temperature = 24;
+    private final int MIN_TEMPERATURE = 18;
+    private final int MAX_TEMPERATURE = 30;
 
     @Override
-    public void turnOn() {
-        System.out.println("에어컨 전원 ON");
+    public void controlUp() {
+        if (temperature < MAX_TEMPERATURE) {
+            temperature++;
+        }
     }
 
     @Override
-    public void turnOff() {
-        System.out.println("에어컨 전원 OFF");
-    }
-
-    @Override
-    public void volumeUp() {
-        volume++;
-    }
-
-    @Override
-    public void volumeDown() {
-        if (volume > 0) {
-            volume--;
+    public void controlDown() {
+        if (temperature > MIN_TEMPERATURE) {
+            temperature--;
         }
     }
 
@@ -32,7 +26,22 @@ public class AirConditioner implements RemoteControl {
     }
 
     @Override
-    public int getVolume() {
-        return volume;
+    public String getControlName() {
+        return "온도";
+    }
+
+    @Override
+    public int getValue() {
+        return temperature;
+    }
+
+    @Override
+    public int getMinValue() {
+        return MIN_TEMPERATURE;
+    }
+
+    @Override
+    public int getMaxValue() {
+        return MAX_TEMPERATURE;
     }
 }

@@ -1,11 +1,24 @@
 package model;
 
 public interface RemoteControl {
+
     void turnOn();
+
     void turnOff();
-    void volumeUp();
-    void volumeDown();
+
+    void controlUp();
+
+    void controlDown();
 
     String getName();
-    int getVolume();
+
+    String getControlName();
+
+    int getValue();
+
+    int getMinValue();
+
+    int getMaxValue();
+
+    boolean isPowerOn();
 }
