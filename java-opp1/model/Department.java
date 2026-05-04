@@ -12,8 +12,8 @@ public class Department {
         this.building = building;
     }
 
-    public void printAll(Department department){
-        System.out.printf("학과명: %s\n학생 수: %d\n건물: %s\n",department.name,department.studentCount,department.building);
+    public void printAll(){
+        System.out.printf("학과명: %s\n학생 수: %d\n건물: %s\n",this.name,this.studentCount,this.building);
     }
 
 
