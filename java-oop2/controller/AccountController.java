@@ -28,7 +28,7 @@ public class AccountController {
             switch (selectMenu) {
                 case 1 -> startTransaction(new DepositInput(), ErrorMessage.DEPOSIT, new Deposit());
                 case 2 -> startTransaction(new WithdrawalInput(), ErrorMessage.WITHDRAWAL, new Withdrawal());
-                case 3-> UserInformation.userinformation(account);
+                case 3-> UserInformation.userInformation(account);
                 case 4 ->UserInformation.printMoney(account);
                 case 5 -> loop = false;
                 default -> ErrorMessage.INPUT.printError();
@@ -37,7 +37,7 @@ public class AccountController {
 
     }
 
-    public void startTransaction(UserInput  userInput, ErrorMessage errorMessage, Transactions transactions){
+    private void startTransaction(UserInput  userInput, ErrorMessage errorMessage, Transactions transactions){
         int money = userInput.userInput();
         if(transactions.transaction(account, money)){
            UserInformation.printMoney(account);
