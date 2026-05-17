@@ -1,7 +1,7 @@
 package model.charactor;
 
-public class Warrio extends Character {
-    public Warrio(){
+public class Warrior extends Character {
+    public Warrior(){
         super("Warrio",15,3);
     }
 }
