@@ -1,7 +1,10 @@
 import controller.AttackController;
 import model.ChoiceUser;
+import model.charactor.Character;
+import view.StatusMessage;
 import view.UserView;
-import controller.CharactorController;
+import controller.CharacterController;
+import view.attackmessage.AttackMessage;
 
 public class Runner {
     public static void run() {
@@ -10,8 +13,10 @@ public class Runner {
         ChoiceUser choiceUser = new ChoiceUser();
         AttackController attackController = new AttackController();
 
-        CharactorController characterController = new CharactorController(userView, choiceUser, attackController);
+        CharacterController characterController = new CharacterController(userView, choiceUser, attackController);
+        Character a = characterController.run();
+        StatusMessage.statusMessage(a);
+        characterController.getAttackMessage().attackMessage();
 
-        characterController.run();
     }
 }
