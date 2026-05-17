@@ -9,9 +9,9 @@ public class AttackController {
 
     public AttackMessage choiceAttack(int choice) {
         if (choice == 1) {
-            return new MageMessage();
-        } else if (choice == 2) {
             return new WarrioMessage();
+        } else if (choice == 2) {
+            return new MageMessage();
         } else {
             return new AttackMessage();
         }
