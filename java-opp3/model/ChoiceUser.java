@@ -3,12 +3,12 @@ package model;
 
 import model.charactor.Character;
 import model.charactor.Mage;
-import model.charactor.Warrio;
+import model.charactor.Warrior;
 
 public class ChoiceUser {
     public Character create(int choice){
         if(choice==1){
-            return new Warrio();
+            return new Warrior();
         }else if(choice ==2){
             return new Mage();
         }
