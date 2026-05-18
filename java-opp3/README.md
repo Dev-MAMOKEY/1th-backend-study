@@ -15,7 +15,7 @@ java -cp out Main
 
 ## 💡 작업 내용
 - Character 클래스 생성
-- Mage, Warrio/ Character 상속 받음
+- Mage, Warrior/ Character 상속 받음
 - attackmessage 폴더 안에 있는 클래스는 과제에서 오버라이딩 수행하라고 하여 클래스로 작성후 상속 받았습니다.
 - Runner 클래스 안에서 실행에 필요한 객체 생성 후 Main에서 run()으로만 호출해 실행하게 하였습니다.
 - 마녀와 전사의 정보와 공격 메세지를 출력하도록 구성하였습니다.
