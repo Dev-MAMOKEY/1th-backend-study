@@ -11,8 +11,8 @@ public class Account {
         this.balance = balance;
     }
 
-    static String bankName = "Mamoki Bank";
-    static final int MIN_BALANCE = 0;
+    private static String bankName = "Mamoki Bank";
+    private static final int MIN_BALANCE = 0;
 
     public String getAccountNumber() {
         return accountNumber;
@@ -32,5 +32,29 @@ public class Account {
 
     public void setBalance() {
         setBalance(0);
+    }
+
+    public boolean withdraw(Account account, int amount) {
+        if (amount < 0) {
+            return false;
+        }
+
+        if (account.getBalance() - amount < Account.MIN_BALANCE) {
+            return false;
+        } else {
+            account.setBalance(account.getBalance() - amount);
+
+            return true;
+        }
+    }
+
+    public boolean deposit(Account account, int amount) {
+        if (amount < 0) {
+            return false;
+        }
+
+        account.setBalance(account.getBalance() + amount);
+
+        return true;
     }
 }
