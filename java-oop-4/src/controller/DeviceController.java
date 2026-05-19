@@ -1,20 +1,20 @@
 package controller;
 
-import model.AirConditioner;
+import model.CreateDevice;
 import model.RemoteControl;
-import model.Television;
 import view.Select;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class DeviceController {
+    private final CreateDevice createDevice = new CreateDevice();
     private final Select select = new Select();
     private final MenuController menuController = new MenuController();
     private final Scanner scanner = new Scanner(System.in);
 
     public void run() {
-        RemoteControl[] devices = {new Television(), new AirConditioner()};
+        RemoteControl[] devices = createDevice.createDevices();
 
         for (RemoteControl device : devices) {
             device.turnOn();
