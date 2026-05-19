@@ -3,8 +3,8 @@
 
 ## ⚙️ 실행 방법
 1. cd 명령어를 사용하여 java-oop-3/src까지 이동
-2. 'javac controller/*.java model/*.java view/*.java Main.java'를 입력하여 컴파일
-3. 'java.c'를 입력하여 실행
+2. 'javac characterCont~~~~roller/*.java model/*.java view/*.java Main.java'를 입력하여 컴파일
+3. 'java Main'을 입력하여 실행
 
 ## 💡 작업 내용
 - 스캐너를 사용하여 키보드로 숫자를 입력하여 원하는 캐릭터 선택

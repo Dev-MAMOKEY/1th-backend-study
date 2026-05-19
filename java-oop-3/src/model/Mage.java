@@ -7,6 +7,6 @@ public class Mage extends Character{
 
     @Override
     public String attack() {
-        return "Mage cats fireball!";
+        return "Mage casts fireball!";
     }
 }
