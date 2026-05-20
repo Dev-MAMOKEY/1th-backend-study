@@ -1,9 +1,9 @@
 package model;
 
 public class Student{
-    private  String name;
-    private String studentId;
-    private String major;
+    private final String name;
+    private final String studentId;
+    private final String major;
 
 
     public Student(String name,String studentId,String major){
