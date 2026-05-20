@@ -11,7 +11,7 @@
 ```
 {username}/                          ← 본인 브랜치 (예: likelion2014)
 ├── java-basic/
-│   ├── Main.java
+│   ├── src.Main.java
 │   └── README.md
 ├── spring-mvc/
 │   ├── src/

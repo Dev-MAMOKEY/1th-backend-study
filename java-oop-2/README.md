@@ -4,9 +4,9 @@ Account 클래스 구현
 ## ⚙️ 실행 방법
 
 ```bash
-cd java-oop-2
-javac -d . controller/*.java model/*.java view/*.java Main.java
-java Main
+cd java-oop-2/src
+javac Main.java domain\account\controller\*.java domain\account\entity\*.java domain\account\service\*.java domain\account\view\*.java
+java src.Main
 ```
 
 ## 💡 작업 내용
@@ -18,16 +18,18 @@ java Main
 ## 📂 프로젝트 구조
 
 ```
-java-oop-2
-├─ controller
-│ └─ Run.java // 사용자 입력 및 프로그램 흐름 제어
-├─ model
-│ ├─ Account.java // 계좌 데이터 관리
-│ └─ Transfer.java // 입출금 로직 처리
-├─ view
-│ ├─ PrintInfo.java // 계좌 정보 출력
-│ └─ PrintMessage.java // 입출금 결과 메시지 출력
-└─ Main.java // 프로그램 시작
+src
+├─ Main.java
+└─ domain
+   └─ account
+      ├─ controller
+      │  └─ AccountController.java
+      ├─ entity
+      │  └─ Account.java
+      ├─ service
+      │  └─ AccountService.java
+      └─ view
+         └─ AccountView.java
 ```
 
 ## 🔗 참고 링크
@@ -40,3 +42,4 @@ java-oop-2
 - 기능 구현과 더불어 기능 분리에 초점을 맞춰서 과제를 했습니다. 
 - MVC패턴과 단일 책임 원칙을 코드 구조 설계에 최대한 반영해 보았습니다.
 - 처음에는 클래스가 많아져서 복잡하게 느껴졌지만, 이로 인해 코드 수정과 흐름 파악이 용이하게 된 것 같습니다.
+- 도메인 주도 설계에 대해 알아보는 계기가 되었습니다.
