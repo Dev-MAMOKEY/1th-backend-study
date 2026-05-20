@@ -11,12 +11,15 @@ public class Student{
         this.studentId = studentId;
         this. major = major;
     }
-    // 출력 메소드
-    public static void printAll(Student[] students){
-        for(Student student : students){
-            System.out.printf("이름:%s 학번:%s 전공:%s\n",student.name,student.studentId,student.major);
-        }
+
+    public String getName() {
+        return name;
+    }
+    public String getStudentId(){
+        return studentId;
     }
 
-
+    public String getMajor() {
+        return major;
+    }
 }
