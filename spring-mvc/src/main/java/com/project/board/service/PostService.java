@@ -6,6 +6,7 @@ import com.project.board.entity.Post;
 import com.project.board.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -13,16 +14,23 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class PostService {
 
     private final PostRepository postRepository;
 
     // 게시글 생성
+    @Transactional
     public PostResponse createPost(PostRequest request) {
 
+        // 제목 중복 확인 추가
+        if (postRepository.existsByTitle(request.title())) {
+            return null;
+        }
+
         Post post = Post.builder()
-                .title(request.getTitle())
-                .content(request.getContent())
+                .title(request.title())
+                .content(request.content())
                 .createdAt(LocalDateTime.now())
                 .build();
 
@@ -56,6 +64,7 @@ public class PostService {
     }
 
     // 수정
+    @Transactional
     public PostResponse updatePost(Long id, PostRequest request) {
 
         Post post = postRepository.findById(id).orElse(null);
@@ -64,12 +73,13 @@ public class PostService {
             return null;
         }
 
-        post.update(request.getTitle(), request.getContent());
+        post.update(request.title(), request.content());
 
-        return changeToResponse(postRepository.save(post));
+        return changeToResponse(post);
     }
 
     // 삭제
+    @Transactional
     public boolean deletePost(Long id) {
 
         if (!postRepository.existsById(id)) {
@@ -84,11 +94,11 @@ public class PostService {
     // Entity -> DTO 변환
     private PostResponse changeToResponse(Post post) {
 
-        return PostResponse.builder()
-                .id(post.getId())
-                .title(post.getTitle())
-                .content(post.getContent())
-                .createdAt(post.getCreatedAt())
-                .build();
+        return new PostResponse(
+                post.getId(),
+                post.getTitle(),
+                post.getContent(),
+                post.getCreatedAt()
+        );
     }
 }
