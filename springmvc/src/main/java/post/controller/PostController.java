@@ -1,4 +1,5 @@
 package post.controller;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import post.dto.PostNewRequest;
 import post.dto.PostResponse;
@@ -9,14 +10,10 @@ import post.service.PostService;
 import java.util.List;
 
 @RestController
-
 @RequestMapping("/posts")
+@RequiredArgsConstructor
 public class PostController {
     private final PostService postService;
-
-    public PostController(PostService postService) {
-        this.postService = postService;
-    }
 
 
     @PostMapping
