@@ -8,6 +8,7 @@ import post.dto.PostUpdateRequest;
 import post.entity.Post;
 import post.repository.PostRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,18 +35,25 @@ public class PostService {
     }
 
     public List<PostResponse> findAllPost(){
-        return postRepository.findAll().stream()
-                .map(post -> PostResponse.builder()
-                        .id(post.getId())
-                        .title(post.getTitle())
-                        .content(post.getContent())
-                        .createAt(post.getCreateAt())
-                        .build())
-                        .collect(Collectors.toList());
+        List<Post> posts = postRepository.findAll();
+
+        List<PostResponse> result = new ArrayList<>();
+
+        for(Post post: posts){
+            PostResponse response = PostResponse.builder()
+                    .id(post.getId())
+                    .title(post.getTitle())
+                    .content(post.getContent())
+                    .createAt(post.getCreateAt())
+                    .build();
+            result.add(response);
+        }
+        return result;
+
     }
 
     public PostResponse findIdPost(Long id){
-        Post post = postRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("게시물이 없습니다."));
+        Post post = postRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 id의 게시물이 없습니다."));
         return PostResponse.builder()
                 .id(post.getId())
                 .title(post.getTitle())
@@ -56,7 +64,7 @@ public class PostService {
 
 
     public PostResponse updatePost(Long id, PostUpdateRequest request){
-        Post post = postRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("게시물이 없습니다."));
+        Post post = postRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 id의 게시물이 없습니다."));
         post.update(request.getTitle(), request.getContent());
 
         return PostResponse.builder()
@@ -68,7 +76,7 @@ public class PostService {
     }
 
     public void deletePost(Long id){
-        Post post = postRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("게시물이 없습니다."));
+        Post post = postRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 id의 게시물이 없습니다."));
         postRepository.delete(post);
 
     }

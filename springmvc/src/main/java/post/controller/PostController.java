@@ -1,9 +1,13 @@
 package post.controller;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import post.dto.PostNewRequest;
 import post.dto.PostResponse;
 import post.dto.PostUpdateRequest;
+import post.entity.Post;
 import post.service.PostService;
 
 
@@ -17,29 +21,36 @@ public class PostController {
 
 
     @PostMapping
-    public PostResponse newPost(@RequestBody PostNewRequest requestDto) {
+    public ResponseEntity<PostResponse> newPost(@Valid @RequestBody PostNewRequest requestDto) {
 
-        return postService.newPost(requestDto);
+       PostResponse postResponse =  postService.newPost(requestDto);
+
+       return ResponseEntity.status(HttpStatus.CREATED).body(postResponse); // 201 Created
     }
 
+
     @GetMapping
-    public List<PostResponse> getAllPost(){
-        return postService.findAllPost();
+    public ResponseEntity<List<PostResponse>> getAllPost(){
+        return ResponseEntity.ok(postService.findAllPost());
     }
 
 
     @GetMapping("/{id}")
-    public PostResponse getPost(@PathVariable Long id){
-        return postService.findIdPost(id);
+    public ResponseEntity<PostResponse> getPost(@PathVariable Long id){
+        PostResponse postResponse = postService.findIdPost(id);
+        return ResponseEntity.ok(postResponse);
     }
+
     @PutMapping("/{id}")
-    public PostResponse updatePost(@PathVariable Long id, @RequestBody PostUpdateRequest requestDto){
-        return postService.updatePost(id,requestDto);
+    public ResponseEntity<PostResponse> updatePost(@Valid @PathVariable Long id, @RequestBody PostUpdateRequest requestDto){
+        PostResponse postResponse = postService.updatePost(id,requestDto);
+        return ResponseEntity.ok(postResponse);
     }
 
     @DeleteMapping("/{id}")
-    public void deletePost(@PathVariable Long id){
+    public ResponseEntity<Void> deletePost(@PathVariable Long id){
         postService.deletePost(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
 }
