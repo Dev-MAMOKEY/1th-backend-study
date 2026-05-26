@@ -1,5 +1,4 @@
-Spackage post.service;
-
+package post.service;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
