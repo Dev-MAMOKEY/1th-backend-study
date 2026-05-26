@@ -1,5 +1,5 @@
 package post.service;
-import jakarta.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import post.dto.PostNewRequest;
@@ -10,14 +10,15 @@ import post.repository.PostRepository;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+
 
 @Service
 @RequiredArgsConstructor
-@Transactional
+@Transactional(readOnly =true)
 public class PostService {
     private final PostRepository postRepository;
 
+    @Transactional
     public PostResponse newPost(PostNewRequest request){
         Post post = Post.builder()
                 .title(request.getTitle())
@@ -33,6 +34,7 @@ public class PostService {
                 .createAt(savePost.getCreateAt())
                 .build();
     }
+
 
     public List<PostResponse> findAllPost(){
         List<Post> posts = postRepository.findAll();
@@ -62,7 +64,7 @@ public class PostService {
                 .build();
     }
 
-
+    @Transactional
     public PostResponse updatePost(Long id, PostUpdateRequest request){
         Post post = postRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 id의 게시물이 없습니다."));
         post.update(request.getTitle(), request.getContent());
@@ -74,7 +76,7 @@ public class PostService {
                 .createAt(post.getCreateAt())
                 .build();
     }
-
+    @Transactional
     public void deletePost(Long id){
         Post post = postRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 id의 게시물이 없습니다."));
         postRepository.delete(post);
