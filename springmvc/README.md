@@ -13,12 +13,16 @@ PostApllication 실행
 ![전체 조회](docs/img_1.png)
 -단건 조회(/posts/{id},GET)
 ![단건 조회](docs/img_2.png)
+- 단건 조회 예외(id 없음)
+![단건 조회 id 잘못입력](docs/img_7.png)
 -수정(/posts/{id} ,PUT)
 ![수정 요청](docs/img_3.png)
 ![수정 결과](docs/img_4.png)
+![수정 요청 id 잘못입력](docs/img_8.png)
 -삭제(/posts/{id} ,DELETE)
 ![삭제 요청](docs/img_5.png)
 ![삭제 결과](docs/img_6.png)
+![삭제 요청 id 잘못입력](docs/img_9.png)
 
 
 ## 📡 API 명세 (Spring 과제의 경우)
