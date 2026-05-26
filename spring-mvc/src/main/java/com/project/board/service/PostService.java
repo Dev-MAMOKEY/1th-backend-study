@@ -23,9 +23,8 @@ public class PostService {
     @Transactional
     public PostResponse createPost(PostRequest request) {
 
-        // 제목 중복 확인 추가
         if (postRepository.existsByTitle(request.title())) {
-            return null;
+            throw new IllegalStateException("이미 존재하는 제목입니다.");
         }
 
         Post post = Post.builder()
@@ -34,7 +33,9 @@ public class PostService {
                 .createdAt(LocalDateTime.now())
                 .build();
 
-        return changeToResponse(postRepository.save(post));
+        Post savedPost = postRepository.save(post);
+
+        return changeToResponse(savedPost);
     }
 
     // 전체 조회
@@ -54,11 +55,10 @@ public class PostService {
     // 단건 조회
     public PostResponse getPost(Long id) {
 
-        Post post = postRepository.findById(id).orElse(null);
-
-        if (post == null) {
-            return null;
-        }
+        Post post = postRepository.findById(id)
+                .orElseThrow(() ->
+                        new IllegalArgumentException("게시글을 찾을 수 없습니다.")
+                );
 
         return changeToResponse(post);
     }
@@ -67,11 +67,10 @@ public class PostService {
     @Transactional
     public PostResponse updatePost(Long id, PostRequest request) {
 
-        Post post = postRepository.findById(id).orElse(null);
-
-        if (post == null) {
-            return null;
-        }
+        Post post = postRepository.findById(id)
+                .orElseThrow(() ->
+                        new IllegalArgumentException("게시글을 찾을 수 없습니다.")
+                );
 
         post.update(request.title(), request.content());
 
@@ -80,15 +79,14 @@ public class PostService {
 
     // 삭제
     @Transactional
-    public boolean deletePost(Long id) {
+    public void deletePost(Long id) {
 
-        if (!postRepository.existsById(id)) {
-            return false;
-        }
+        Post post = postRepository.findById(id)
+                .orElseThrow(() ->
+                        new IllegalArgumentException("게시글을 찾을 수 없습니다.")
+                );
 
-        postRepository.deleteById(id);
-
-        return true;
+        postRepository.delete(post);
     }
 
     // Entity -> DTO 변환
@@ -100,5 +98,10 @@ public class PostService {
                 post.getContent(),
                 post.getCreatedAt()
         );
+
     }
+
+
+
+
 }
