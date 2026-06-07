@@ -70,7 +70,7 @@ public class CommentService {
                 .build();
     }
     // 댓글 전체 조회 -slice 적용
-    public Slice<CommentResponse> getCommentWitrhSlice(Long boardId,int page, int size){
+    public Slice<CommentResponse> getCommentWithSlice(Long boardId,int page, int size){
         Pageable pageable = PageRequest.of(page, size, Sort.by("createAt").descending());
         return commentRepository.findByPostId(boardId, pageable)
                 .map(comment -> CommentResponse.builder().

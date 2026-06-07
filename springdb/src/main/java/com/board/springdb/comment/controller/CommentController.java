@@ -46,7 +46,7 @@ public class CommentController {
             @PathVariable Long id,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size) {
-        Slice<CommentResponse> commentResponses = commentService.getCommentWitrhSlice(id, page, size);
+        Slice<CommentResponse> commentResponses = commentService.getCommentWithSlice(id, page, size);
         RsData<Slice<CommentResponse>> rsData = new RsData<>("200-1", "댓글 조회가 완료되었습니다", commentResponses);
         return  ResponseEntity.status(rsData.statusCode()).body(rsData);
     }
