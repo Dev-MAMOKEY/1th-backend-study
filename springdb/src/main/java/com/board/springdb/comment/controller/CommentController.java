@@ -20,7 +20,7 @@ public class CommentController {
     @PostMapping
     public ResponseEntity<RsData<CommentResponse>> newComment(@RequestBody CommentRequest commentRequest, @PathVariable Long id) {
         CommentResponse commentResponse = commentService.newComment(id, commentRequest);
-        RsData<CommentResponse> rsData = new RsData<>("200-1", "댓글이 등록되었습니다", commentResponse);
+        RsData<CommentResponse> rsData = new RsData<>("201-1", "댓글이 등록되었습니다", commentResponse);
         return ResponseEntity.status(rsData.statusCode()).body(rsData);
     }
 
