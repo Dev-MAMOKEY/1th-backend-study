@@ -38,7 +38,7 @@ public class PostController {
     @GetMapping("/{id}")
     public ResponseEntity<RsData<PostResponse>> onePost(@PathVariable Long id){
         PostResponse postResponse = postService.findOnePost(id);
-        RsData<PostResponse> rsData = new RsData<>("200-1","한개의 게시물 조회가 완료되었습니다",postResponse);
+        RsData<PostResponse> rsData = new RsData<>("200-2","한개의 게시물 조회가 완료되었습니다",postResponse);
         return ResponseEntity.status(rsData.statusCode()).body(rsData);
     }
 
@@ -46,7 +46,7 @@ public class PostController {
     @PutMapping("/{id}")
     public ResponseEntity<RsData<PostResponse>> updatePost(@PathVariable Long id, @RequestBody PostUpdateRequest requestDto){
         PostResponse postResponse = postService.updatePost(requestDto,id);
-        RsData<PostResponse> rsData = new RsData<>("200-1","게시물이 정상적으로 수정되었습니다",postResponse);
+        RsData<PostResponse> rsData = new RsData<>("200-3","게시물이 정상적으로 수정되었습니다",postResponse);
         return ResponseEntity.status(rsData.statusCode()).body(rsData);
     }
 
@@ -55,7 +55,7 @@ public class PostController {
     public ResponseEntity<RsData<Void>> deletePost(@PathVariable Long id ){
         postService.deletePost(id);
 
-        RsData<Void> rsData = new RsData<>("200-1", "게시물이 정상적으로 삭제되었습니다");
+        RsData<Void> rsData = new RsData<>("200-4", "게시물이 정상적으로 삭제되었습니다");
         return ResponseEntity.status(rsData.statusCode()).body(rsData);
     }
     // 전체 조회하기 (페이징)
@@ -64,7 +64,7 @@ public class PostController {
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size) {
         Page<PostResponse> postResponse = postService.getPostWithPaging(page, size);
-        RsData<Page<PostResponse>> rsData = new RsData<>("200-1", (page + 1)+"페이지 조회가 완료되었습니다", postResponse);
+        RsData<Page<PostResponse>> rsData = new RsData<>("200-5", (page + 1)+"페이지 조회가 완료되었습니다", postResponse);
         return ResponseEntity.status(rsData.statusCode()).body(rsData);
     }
 
