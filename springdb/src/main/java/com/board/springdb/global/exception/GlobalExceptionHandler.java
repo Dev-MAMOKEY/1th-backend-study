@@ -11,7 +11,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<RsData<Void>> handleIllegalArgumentException(IllegalArgumentException e) {
 
-        RsData<Void> rsData = new RsData<>("400-1", "존재하지 않는 게시물입니다.");
+        RsData<Void> rsData = new RsData<>("404-1", "존재하지 않는 게시물입니다.");
 
         return ResponseEntity
                 .status(rsData.statusCode())
