@@ -10,14 +10,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/post/{id}/comment")
+@RequestMapping("/post")
 @RequiredArgsConstructor
 public class CommentController {
     private final CommentService commentService;
 
 
     // 댓글 생성
-    @PostMapping
+    @PostMapping("/{id}/comment")
     public ResponseEntity<RsData<CommentResponse>> newComment(@RequestBody CommentRequest commentRequest, @PathVariable Long id) {
         CommentResponse commentResponse = commentService.newComment(id, commentRequest);
         RsData<CommentResponse> rsData = new RsData<>("201-1", "댓글이 등록되었습니다", commentResponse);
@@ -25,7 +25,7 @@ public class CommentController {
     }
 
     //댓글 단건 조회
-    @GetMapping("/{commentId}")
+    @GetMapping("/{id}/comment/{commentId}")
     public ResponseEntity<RsData<CommentResponse>> oneComment(@PathVariable Long commentId) {
         CommentResponse commentResponse = commentService.findOneComment(commentId);
         RsData<CommentResponse> rsData = new RsData<>("200-1", "해당 댓글 조회 완료되었습니다", commentResponse);
@@ -33,7 +33,7 @@ public class CommentController {
     }
 
     //댓글 수정
-    @PutMapping("/{commentId}")
+    @PutMapping("/{id}/comment/{commentId}")
     public ResponseEntity<RsData<CommentResponse>> updateCommet(@PathVariable Long commentId,@RequestBody CommentRequest request){
         CommentResponse commentResponse = commentService.updateComment(commentId,request);
         RsData<CommentResponse> rsData = new RsData<>("200-1","댓글이 수정되었습니다",commentResponse);
@@ -41,7 +41,7 @@ public class CommentController {
     }
 
     // 댓글 전체 조회하기(slice)
-    @GetMapping
+    @GetMapping("/{id}/comment")
     public ResponseEntity<RsData<Slice<CommentResponse>>> getComment(
             @PathVariable Long id,
             @RequestParam(defaultValue = "0") int page,
@@ -51,7 +51,7 @@ public class CommentController {
         return  ResponseEntity.status(rsData.statusCode()).body(rsData);
     }
 
-    @DeleteMapping("/{commentId}")
+    @DeleteMapping("/{id}/comment/{commentId}")
     public ResponseEntity<RsData<Void>> deleteComment(@PathVariable Long commentId){
         commentService.deleteComment(commentId);
 
