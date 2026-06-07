@@ -26,16 +26,16 @@ public class CommentController {
 
     //댓글 단건 조회
     @GetMapping("/{id}/comment/{commentId}")
-    public ResponseEntity<RsData<CommentResponse>> oneComment(@PathVariable Long commentId) {
-        CommentResponse commentResponse = commentService.findOneComment(commentId);
+    public ResponseEntity<RsData<CommentResponse>> oneComment(@PathVariable Long id, @PathVariable Long commentId) {
+        CommentResponse commentResponse = commentService.findOneComment(id,commentId);
         RsData<CommentResponse> rsData = new RsData<>("200-1", "해당 댓글 조회 완료되었습니다", commentResponse);
         return ResponseEntity.status(rsData.statusCode()).body(rsData);
     }
 
     //댓글 수정
     @PutMapping("/{id}/comment/{commentId}")
-    public ResponseEntity<RsData<CommentResponse>> updateCommet(@PathVariable Long commentId,@RequestBody CommentRequest request){
-        CommentResponse commentResponse = commentService.updateComment(commentId,request);
+    public ResponseEntity<RsData<CommentResponse>> updateCommet(@PathVariable Long id, @PathVariable Long commentId,@RequestBody CommentRequest request){
+        CommentResponse commentResponse = commentService.updateComment(id,commentId,request);
         RsData<CommentResponse> rsData = new RsData<>("200-1","댓글이 수정되었습니다",commentResponse);
         return ResponseEntity.status(rsData.statusCode()).body(rsData);
     }
@@ -52,8 +52,8 @@ public class CommentController {
     }
 
     @DeleteMapping("/{id}/comment/{commentId}")
-    public ResponseEntity<RsData<Void>> deleteComment(@PathVariable Long commentId){
-        commentService.deleteComment(commentId);
+    public ResponseEntity<RsData<Void>> deleteComment(@PathVariable Long id, @PathVariable Long commentId){
+        commentService.deleteComment(id, commentId);
 
         RsData<Void> rsData = new RsData<>("200-1", "댓글이 정상적으로 삭제 되었습니다");
         return ResponseEntity.status(rsData.statusCode()).body(rsData);

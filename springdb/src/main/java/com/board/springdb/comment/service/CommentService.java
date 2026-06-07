@@ -46,8 +46,14 @@ public class CommentService {
 
     // 댓글 수정
     @Transactional
-    public CommentResponse updateComment(Long comment_id,CommentRequest request){
+    public CommentResponse updateComment(Long id, Long comment_id,CommentRequest request){
+        Post post =postRepository.findById(id).orElseThrow(IllegalArgumentException::new);
         Comment comment = commentRepository.findById(comment_id).orElseThrow(IllegalArgumentException::new);
+
+        if(!comment.getPost().getId().equals(id)){
+            throw new IllegalArgumentException();
+        }
+
         comment.update(request.commentContent());
         return CommentResponse.builder().
                 commentId(comment.getComment_Id()).
@@ -59,8 +65,15 @@ public class CommentService {
     }
 
     // 댓글 단건 조회
-    public CommentResponse findOneComment(Long comment_id){
+    public CommentResponse findOneComment(Long id, Long comment_id){
+        Post post =postRepository.findById(id).orElseThrow(IllegalArgumentException::new);
         Comment comment = commentRepository.findById(comment_id).orElseThrow(IllegalArgumentException::new);
+
+        if(!comment.getPost().getId().equals(id)){
+            throw new IllegalArgumentException();
+        }
+
+
         return CommentResponse.builder().
                 commentId(comment.getComment_Id()).
                 commentContent(comment.getCommentContent()).
@@ -84,8 +97,13 @@ public class CommentService {
 
     // 댓글 삭제
     @Transactional
-    public void deleteComment(Long commentId){
+    public void deleteComment(Long id,Long commentId){
+        Post post =postRepository.findById(id).orElseThrow(IllegalArgumentException::new);
         Comment comment = commentRepository.findById(commentId).orElseThrow(IllegalArgumentException::new);
+        if(!comment.getPost().getId().equals(id)){
+            throw new IllegalArgumentException();
+        }
+
         commentRepository.delete(comment);
     }
 
