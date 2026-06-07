@@ -88,6 +88,7 @@ public class PostService {
     }
 
     // 단건 삭제
+    @Transactional
     public void deletePost(Long id){
         Post post = postRepository.findById(id).orElseThrow(IllegalArgumentException::new);
         postRepository.delete(post);
