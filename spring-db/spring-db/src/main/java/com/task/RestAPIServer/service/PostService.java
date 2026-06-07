@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 // final 필드를 대상으로 생성자를 자동 생성
 // postRepository를 생성자 주입 방식으로 주입받기 위해 사용
@@ -17,6 +18,10 @@ import org.springframework.stereotype.Service;
 // 이 클래스가 Service의 역할을 한다는 것을 나타냄
 // Service는 Controller와 Repository 사이에서 비즈니스 로직 처리
 @Service
+
+// 이 클래스의 메서드들이 하나의 트랜잭션 안에서 실행되도록 설정
+// DB 변경 작업 중 예외가 발생하면 변경 내용을 롤백하고, 정상 종료되면 커밋
+@Transactional
 public class PostService {
 
     // 게시글 데이터를 DB에 저장, 조회, 수정, 삭자하기 위한 Repository
@@ -43,6 +48,9 @@ public class PostService {
         return postRepository.save(post);
     }
 
+    // 조회 전용 트랜잭션으로 설정
+    @Transactional(readOnly = true)
+
     // 단건 게시글 찾기
     public Post findById(Long id) {
 
@@ -53,6 +61,9 @@ public class PostService {
                 // 게시글이 존재하지 않으면 PostNotFoundException 예외 발생
                 .orElseThrow(() -> new PostNotFoundException(id));
     }
+
+    // 조회 전용 트랜잭션으로 설정
+    @Transactional(readOnly = true)
 
     // 전체 게시글 찾기
     public Page<Post> findAllPosts(Pageable pageable) {
