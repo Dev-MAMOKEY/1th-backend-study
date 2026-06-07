@@ -1,0 +1,28 @@
+# IntelliJ
+.idea/
+*.iml
+
+# IntelliJ Local Settings
+/workspace.xml
+/shelf/
+/httpRequests/
+/queries/
+/dataSources/
+/dataSources.local.xml
+
+# macOS
+.DS_Store
+
+# Gradle
+.gradle/
+build/
+
+# Environment
+.env
+
+# Logs
+*.log
+
+# Spring Boot
+target/
+out/
