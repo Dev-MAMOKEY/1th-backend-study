@@ -22,7 +22,7 @@ public class PostController {
     @PostMapping
     public ResponseEntity<RsData<PostResponse>> newPost(@Valid  @RequestBody PostNewRequest requestDto){
         PostResponse postResponse = postService.newPost(requestDto);
-        RsData<PostResponse> rsData = new RsData<>("200-1","게시물이 등록되었습니다",postResponse);
+        RsData<PostResponse> rsData = new RsData<>("201-1","게시물이 등록되었습니다",postResponse);
         return ResponseEntity.status(rsData.statusCode()).body(rsData);
     }
 
