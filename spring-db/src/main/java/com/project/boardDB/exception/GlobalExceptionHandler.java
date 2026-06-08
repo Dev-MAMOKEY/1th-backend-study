@@ -6,16 +6,18 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+// 전역 예외 처리 클래스
+// Controller에서 발생한 예외를 한 곳에서 처리
 @RestControllerAdvice
 public class GlobalExceptionHandler {
-
+    // 게시글을 찾을 수 없을 때 발생하는 예외 처리
     @ExceptionHandler(PostNotFoundException.class)
     public ResponseEntity<ErrorResponse> handlePostNotFoundException(PostNotFoundException e) {
         return ResponseEntity
                 .status(HttpStatus.NOT_FOUND)
                 .body(new ErrorResponse(e.getMessage(), HttpStatus.NOT_FOUND.value()));
     }
-
+    // 제목이 중복될 때 발생하는 예외 처리
     @ExceptionHandler(DuplicateTitleException.class)
     public ResponseEntity<ErrorResponse> handleDuplicateTitleException(DuplicateTitleException e) {
         return ResponseEntity
