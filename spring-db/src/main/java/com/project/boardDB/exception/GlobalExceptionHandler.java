@@ -13,13 +13,13 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErrorResponse> handlePostNotFoundException(PostNotFoundException e) {
         return ResponseEntity
                 .status(HttpStatus.NOT_FOUND)
-                .body(new ErrorResponse(e.getMessage()));
+                .body(new ErrorResponse(e.getMessage(), HttpStatus.NOT_FOUND.value()));
     }
 
     @ExceptionHandler(DuplicateTitleException.class)
     public ResponseEntity<ErrorResponse> handleDuplicateTitleException(DuplicateTitleException e) {
         return ResponseEntity
                 .status(HttpStatus.CONFLICT)
-                .body(new ErrorResponse(e.getMessage()));
+                .body(new ErrorResponse(e.getMessage(), HttpStatus.CONFLICT.value()));
     }
 }

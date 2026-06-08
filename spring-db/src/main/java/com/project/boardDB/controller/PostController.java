@@ -1,12 +1,11 @@
 package com.project.boardDB.controller;
 
-import com.project.boardDB.dto.PostPageResponse;
 import com.project.boardDB.dto.PostRequest;
 import com.project.boardDB.dto.PostResponse;
 import com.project.boardDB.service.PostService;
-
 import lombok.RequiredArgsConstructor;
 
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
@@ -30,11 +29,10 @@ public class PostController {
 
     // 전체 조회
     @GetMapping
-    public ResponseEntity<PostPageResponse> getAllPosts(
+    public ResponseEntity<Page<PostResponse>> getAllPosts(
             @PageableDefault(size = 10, sort = "id", direction = Sort.Direction.DESC)
             Pageable pageable
-    )
-    {
+    ) {
         return ResponseEntity.ok(postService.getAllPosts(pageable));
     }
 
@@ -56,6 +54,4 @@ public class PostController {
         postService.deletePost(id);
         return ResponseEntity.noContent().build();
     }
-
-
 }
