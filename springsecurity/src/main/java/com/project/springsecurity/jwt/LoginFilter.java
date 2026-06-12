@@ -59,15 +59,12 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authentication) {
         CustomUserDetails customUserDetails = (CustomUserDetails) authentication.getPrincipal();
-
         String username = customUserDetails.getUsername();
-
         String role = authentication.getAuthorities().iterator().next().getAuthority();
-
-
         String token = jwtUtil.createJwt(username, role, 60*10*1000L);
 
         response.addHeader("Authorization", "Bearer " + token);
+
     }
 
 
