@@ -1,6 +1,8 @@
 package com.project.springsecurity.config;
 
 
+import com.project.springsecurity.global.exception.CustomAccessDeniedHandler;
+import com.project.springsecurity.global.exception.CustomAuthenticationEntryPoint;
 import com.project.springsecurity.jwt.JWTFilter;
 import com.project.springsecurity.jwt.LoginFilter;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +24,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig {
     private final AuthenticationConfiguration authenticationConfiguration;
     private final JWTUtil jwtUtil;
+    private final CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
+    private final CustomAccessDeniedHandler customAccessDeniedHandler;
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
 
@@ -67,6 +71,13 @@ public class SecurityConfig {
         http
                 .sessionManagement((session) -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+        // 401,403 오류처리
+        http
+                .exceptionHandling(ex -> ex
+                        .authenticationEntryPoint(customAuthenticationEntryPoint)
+                        .accessDeniedHandler(customAccessDeniedHandler));
+
+
 
         return http.build();
     }

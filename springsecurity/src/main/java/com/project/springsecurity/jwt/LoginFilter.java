@@ -4,10 +4,12 @@ package com.project.springsecurity.jwt;
 import com.project.springsecurity.config.JWTUtil;
 import com.project.springsecurity.dto.CustomUserDetails;
 import com.project.springsecurity.dto.LoginDto;
+import com.project.springsecurity.global.RsData.RsData;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletInputStream;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
 
 import org.springframework.security.authentication.AuthenticationManager;
@@ -25,6 +27,7 @@ import java.nio.charset.StandardCharsets;
 public class LoginFilter extends UsernamePasswordAuthenticationFilter {
     private final AuthenticationManager authenticationManager;
     private final JWTUtil jwtUtil;
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
     public LoginFilter(AuthenticationManager authenticationManager, JWTUtil jwtUtil) {
         this.authenticationManager = authenticationManager;
@@ -38,7 +41,6 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 
         try {
 
-            ObjectMapper objectMapper = new ObjectMapper();
             ServletInputStream inputStream = request.getInputStream();
             String messageBody = StreamUtils.copyToString(inputStream, StandardCharsets.UTF_8);
 
@@ -69,8 +71,14 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 
 
     @Override
-    protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed)  {
-        response.setStatus(401);
+    protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) throws  IOException {
+        RsData<Void> rsData = new RsData<>("401-2", "아이디 또는 비밀번호가 일치하지 않습니다.");
+
+        response.setStatus(rsData.statusCode());
+        response.setContentType(MediaType.APPLICATION_JSON_VALUE);
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write(objectMapper.writeValueAsString(rsData));
+
 
     }
 
